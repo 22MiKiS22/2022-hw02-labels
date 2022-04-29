@@ -22,10 +22,6 @@ public final class LabeledOperations {
      * @return expression-based label matcher
      */
     public static LabelMatcher expressionMatcher(String expression) {
-        if (expression.matches(" *") ||
-                !expression.matches("(!*[A-Za-z0-9]+)( *(&|[|]) *!*[A-Za-z0-9]+)*")) {
-            throw new InvalidExpressionException(expression);
-        }
         return new LabelMatcherImpl(expression);
     }
 
@@ -38,10 +34,6 @@ public final class LabeledOperations {
      * @return expression-based label filter
      */
     public static LabelFilter expressionFilter(String expression) {
-        if (expression.matches(" *") ||
-                !expression.matches("(!*[A-Za-z0-9]+)( *(&|[|]) *!*[A-Za-z0-9]+)*")) {
-            throw new InvalidExpressionException(expression);
-        }
         return new LabelFilterImpl(expression);
     }
 }

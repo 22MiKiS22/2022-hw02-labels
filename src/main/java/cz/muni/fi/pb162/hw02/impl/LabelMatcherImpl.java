@@ -2,6 +2,7 @@ package cz.muni.fi.pb162.hw02.impl;
 
 import cz.muni.fi.pb162.hw02.HasLabels;
 import cz.muni.fi.pb162.hw02.LabelMatcher;
+import cz.muni.fi.pb162.hw02.error.InvalidExpressionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,10 @@ public class LabelMatcherImpl implements LabelMatcher {
      * @param expression expression
      */
     public LabelMatcherImpl(String expression) {
+        if (expression.matches(" *") ||
+                !expression.matches("(!*[A-Za-z0-9]+)( *(&|[|]) *!*[A-Za-z0-9]+)*")) {
+            throw new InvalidExpressionException(expression);
+        }
         this.expression = new ArrayList<>(List.of(expression
                 .trim()
                 .replaceAll(" +", "")
